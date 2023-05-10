@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import TodoList from "./components/TaskList.jsx";
+import { ItemContext } from "./Context/ItemContext.jsx";
+import { ItemListContext } from "./Context/ItemListContext";
+
+import { useState } from "react";
+
+console.log('ba' + + 'a')
+
+export default function App() {
+  const [inputs, setInput] = useState("");
+  const [itemList, setItemList] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col justify-center items-center">
+    <h1 className="text-4xl mt-5">To Do List</h1>
+      <ItemContext.Provider value={[inputs, setInput]}>
+        <ItemListContext.Provider value={[itemList, setItemList]}>
+          <TodoList />
+        </ItemListContext.Provider>
+      </ItemContext.Provider>
     </div>
   );
 }
-
-export default App;
